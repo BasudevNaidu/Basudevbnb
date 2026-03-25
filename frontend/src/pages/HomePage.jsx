@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { FiSearch } from 'react-icons/fi'
+import { FiSearch, FiGlobe, FiX } from 'react-icons/fi'
 import api from '../utils/api'
 import PropertyCard from '../components/PropertyCard'
 import SkeletonCard from '../components/SkeletonCard'
@@ -13,22 +13,38 @@ const categories = [
   { name: 'Luxury', emoji: '💎', img: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400' },
 ]
 
+const countries = [
+  { name: 'All Countries', flag: '🌍', code: '' },
+  { name: 'USA', flag: '🇺🇸', code: 'USA' },
+  { name: 'India', flag: '🇮🇳', code: 'India' },
+  { name: 'France', flag: '🇫🇷', code: 'France' },
+  { name: 'Greece', flag: '🇬🇷', code: 'Greece' },
+  { name: 'UK', flag: '🇬🇧', code: 'UK' },
+  { name: 'Japan', flag: '🇯🇵', code: 'Japan' },
+  { name: 'Maldives', flag: '🇲🇻', code: 'Maldives' },
+  { name: 'Indonesia', flag: '🇮🇩', code: 'Indonesia' },
+  { name: 'UAE', flag: '🇦🇪', code: 'UAE' },
+]
+
 export default function HomePage() {
   const [featured, setFeatured] = useState([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
   const [wishlistIds, setWishlistIds] = useState([])
+  const [selectedCountry, setSelectedCountry] = useState(() => localStorage.getItem('basudevbnb_country') || '')
   const { user } = useAuth()
   const navigate = useNavigate()
 
   useEffect(() => {
     fetchFeatured()
     if (user) fetchWishlist()
-  }, [user])
+  }, [user, selectedCountry])
 
   const fetchFeatured = async () => {
+    setLoading(true)
     try {
-      const { data } = await api.get('/listings/featured')
+      const params = selectedCountry ? `?country=${encodeURIComponent(selectedCountry)}` : ''
+      const { data } = await api.get(`/listings/featured${params}`)
       setFeatured(data)
     } catch (e) {
       console.error(e)
@@ -49,18 +65,25 @@ export default function HomePage() {
     if (searchQuery.trim()) navigate(`/search?search=${encodeURIComponent(searchQuery.trim())}`)
   }
 
+  const handleCountrySelect = (code) => {
+    setSelectedCountry(code)
+    localStorage.setItem('basudevbnb_country', code)
+  }
+
+  const activeCountry = countries.find(c => c.code === selectedCountry)
+
   return (
     <div>
       {/* Hero Section */}
       <div
-        className="relative h-[500px] flex items-center justify-center"
+        className="relative h-[520px] flex items-center justify-center"
         style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1600)', backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Find your next adventure</h1>
+        <div className="absolute inset-0 bg-black/45" />
+        <div className="relative z-10 text-center text-white px-4 w-full max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold mb-3">Find your next adventure</h1>
           <p className="text-lg md:text-xl mb-8 opacity-90">Discover unique places to stay around the world</p>
-          <form onSubmit={handleSearch} className="flex items-center bg-white rounded-full px-6 py-4 max-w-xl mx-auto shadow-2xl">
+          <form onSubmit={handleSearch} className="flex items-center bg-white rounded-full px-6 py-4 max-w-2xl mx-auto shadow-2xl">
             <FiSearch size={20} className="text-gray-400 mr-3 flex-shrink-0" />
             <input
               type="text"
@@ -69,7 +92,7 @@ export default function HomePage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1 outline-none text-gray-800 text-base bg-transparent"
             />
-            <button type="submit" className="bg-primary-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-600 transition-colors ml-3">
+            <button type="submit" className="bg-primary-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-600 transition-colors ml-3 whitespace-nowrap">
               Search
             </button>
           </form>
@@ -77,12 +100,42 @@ export default function HomePage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        {/* Country Selector */}
+        <section className="mb-10">
+          <div className="flex items-center gap-2 mb-4">
+            <FiGlobe size={20} className="text-primary-500" />
+            <h2 className="text-xl font-bold text-gray-900">Browse by Country</h2>
+            {selectedCountry && (
+              <button onClick={() => handleCountrySelect('')} className="ml-auto flex items-center gap-1 text-sm text-gray-500 hover:text-red-500 transition-colors">
+                <FiX size={15} /> Clear filter
+              </button>
+            )}
+          </div>
+          <div className="flex flex-wrap gap-3">
+            {countries.map((country) => (
+              <button
+                key={country.code}
+                onClick={() => handleCountrySelect(country.code)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-medium transition-all ${
+                  selectedCountry === country.code
+                    ? 'bg-primary-500 text-white border-primary-500 shadow-md scale-105'
+                    : 'bg-white border-gray-200 text-gray-700 hover:border-primary-300 hover:bg-primary-50'
+                }`}
+              >
+                <span className="text-base">{country.flag}</span>
+                {country.name}
+              </button>
+            ))}
+          </div>
+        </section>
+
         {/* Categories */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Explore by category</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {categories.map((cat) => (
-              <Link key={cat.name} to={`/search?category=${cat.name}`} className="group relative overflow-hidden rounded-2xl h-40 cursor-pointer">
+              <Link key={cat.name} to={`/search?category=${cat.name}${selectedCountry ? `&country=${selectedCountry}` : ''}`} className="group relative overflow-hidden rounded-2xl h-40 cursor-pointer">
                 <img src={cat.img} alt={cat.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
                 <div className="absolute bottom-4 left-4 text-white">
@@ -97,17 +150,31 @@ export default function HomePage() {
         {/* Featured Listings */}
         <section>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Featured properties</h2>
-            <Link to="/search" className="text-primary-500 font-medium hover:underline text-sm">View all</Link>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">
+                {selectedCountry ? `Properties in ${activeCountry?.flag} ${selectedCountry}` : 'Featured properties'}
+              </h2>
+              {selectedCountry && (
+                <p className="text-sm text-gray-500 mt-0.5">Showing featured stays in {selectedCountry}</p>
+              )}
+            </div>
+            <Link to={`/search${selectedCountry ? `?country=${selectedCountry}` : ''}`} className="text-primary-500 font-medium hover:underline text-sm">
+              View all
+            </Link>
           </div>
+
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {Array(8).fill(0).map((_, i) => <SkeletonCard key={i} />)}
             </div>
           ) : featured.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
-              <p className="text-lg">No featured listings yet.</p>
-              <p className="text-sm mt-2">Check back soon!</p>
+            <div className="text-center py-16 text-gray-400">
+              <span className="text-5xl">{activeCountry?.flag || '🏠'}</span>
+              <p className="text-lg font-medium mt-4 text-gray-600">No featured listings in {selectedCountry} yet.</p>
+              <p className="text-sm mt-2">Try another country or browse all listings.</p>
+              <button onClick={() => handleCountrySelect('')} className="mt-4 bg-primary-500 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-primary-600 transition-colors">
+                Show All Countries
+              </button>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -116,6 +183,15 @@ export default function HomePage() {
               ))}
             </div>
           )}
+        </section>
+
+        {/* How it Works teaser */}
+        <section className="mt-20 bg-gradient-to-br from-primary-50 to-primary-100 rounded-3xl p-10 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">New to Basudevbnb?</h2>
+          <p className="text-gray-600 mb-6">Discover how easy it is to find and book your perfect stay in minutes.</p>
+          <Link to="/how-it-works" className="inline-block bg-primary-500 text-white px-8 py-3 rounded-xl font-semibold hover:bg-primary-600 transition-colors shadow-md">
+            See How It Works
+          </Link>
         </section>
       </div>
     </div>

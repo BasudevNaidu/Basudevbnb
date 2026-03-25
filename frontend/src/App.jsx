@@ -13,6 +13,11 @@ import UserDashboardPage from './pages/UserDashboardPage'
 import WishlistPage from './pages/WishlistPage'
 import BookingPage from './pages/BookingPage'
 import BookingHistoryPage from './pages/BookingHistoryPage'
+import ContactPage from './pages/ContactPage'
+import CancellationPolicyPage from './pages/CancellationPolicyPage'
+import HelpCenterPage from './pages/HelpCenterPage'
+import SafetyInfoPage from './pages/SafetyInfoPage'
+import HowItWorksPage from './pages/HowItWorksPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import ManageListingsPage from './pages/admin/ManageListingsPage'
 import AddListingPage from './pages/admin/AddListingPage'
@@ -34,6 +39,11 @@ function App() {
               <Route path="/listings/:id" element={<ListingDetailPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
+              <Route path="/how-it-works" element={<HowItWorksPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/cancellation-policy" element={<CancellationPolicyPage />} />
+              <Route path="/help" element={<HelpCenterPage />} />
+              <Route path="/safety" element={<SafetyInfoPage />} />
               <Route path="/profile" element={<ProtectedRoute><UserProfilePage /></ProtectedRoute>} />
               <Route path="/dashboard" element={<ProtectedRoute><UserDashboardPage /></ProtectedRoute>} />
               <Route path="/wishlist" element={<ProtectedRoute><WishlistPage /></ProtectedRoute>} />
