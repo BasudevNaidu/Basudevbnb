@@ -19,7 +19,8 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
+    const isAuthRoute = err.config?.url?.includes('/auth/')
+    if (err.response?.status === 401 && !isAuthRoute) {
       localStorage.removeItem('basudevbnb_user')
       window.location.href = '/login'
     }
