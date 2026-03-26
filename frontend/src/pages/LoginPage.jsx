@@ -70,12 +70,7 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 border-t border-gray-200 pt-4 text-center text-sm text-gray-600">
-            <p>Demo credentials:</p>
-            <p className="text-xs mt-1 text-gray-500">Admin: admin@basudevbnb.com / admin123</p>
-            <p className="text-xs text-gray-500">User: user@basudevbnb.com / user123</p>
-          </div>
-
+          
           <p className="text-center text-sm text-gray-600 mt-4">
             Don't have an account?{' '}
             <Link to="/signup" className="text-primary-500 font-medium hover:underline">Sign up</Link>
