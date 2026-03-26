@@ -1,17 +1,19 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: { 'Content-Type': 'application/json' }
 })
 
 api.interceptors.request.use((config) => {
   const stored = localStorage.getItem('basudevbnb_user')
   if (stored) {
-    const user = JSON.parse(stored)
-    if (user.token) {
-      config.headers.Authorization = `Bearer ${user.token}`
-    }
+    try {
+      const user = JSON.parse(stored)
+      if (user.token) {
+        config.headers.Authorization = `Bearer ${user.token}`
+      }
+    } catch (e) {}
   }
   return config
 })

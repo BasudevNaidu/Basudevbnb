@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const Listing = require('../models/Listing');
 
 const getUserProfile = async (req, res) => {
   try {
@@ -12,7 +11,7 @@ const getUserProfile = async (req, res) => {
 
 const updateUserProfile = async (req, res) => {
   try {
-    const { name, email, bio, avatar } = req.body;
+    const { name, email, bio, avatar, password, currentPassword } = req.body;
 
     const user = await User.findById(req.user._id);
     if (!user) return res.status(404).json({ message: 'User not found' });
@@ -22,8 +21,18 @@ const updateUserProfile = async (req, res) => {
     if (bio !== undefined) user.bio = bio;
     if (avatar !== undefined) user.avatar = avatar;
 
-    if (req.body.password) {
-      user.password = req.body.password;
+    if (password) {
+      if (!currentPassword) {
+        return res.status(400).json({ message: 'Please enter your current password to change it' });
+      }
+      const isMatch = await user.matchPassword(currentPassword);
+      if (!isMatch) {
+        return res.status(400).json({ message: 'Current password is incorrect' });
+      }
+      if (password.length < 6) {
+        return res.status(400).json({ message: 'New password must be at least 6 characters' });
+      }
+      user.password = password;
     }
 
     const updated = await user.save();
@@ -33,7 +42,8 @@ const updateUserProfile = async (req, res) => {
       email: updated.email,
       role: updated.role,
       avatar: updated.avatar,
-      bio: updated.bio
+      bio: updated.bio,
+      token: req.headers.authorization?.split(' ')[1]
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -44,14 +54,12 @@ const toggleWishlist = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
     const listingId = req.params.listingId;
-
     const index = user.wishlist.indexOf(listingId);
     if (index === -1) {
       user.wishlist.push(listingId);
     } else {
       user.wishlist.splice(index, 1);
     }
-
     await user.save();
     res.json({ wishlist: user.wishlist, message: index === -1 ? 'Added to wishlist' : 'Removed from wishlist' });
   } catch (error) {
