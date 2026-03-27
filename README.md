@@ -297,11 +297,7 @@ Basudevbnb-Stack/
 
 ### Backend (`backend/.env`)
 ```env
-PORT=5001
-MONGO_URI=mongodb+srv://YOUR_USER:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/basudevbnb
-JWT_SECRET=your_super_secret_jwt_key_change_this_to_something_long
-NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
+
 ```
 
 ### Frontend (`frontend/.env`)
