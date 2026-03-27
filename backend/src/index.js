@@ -9,8 +9,21 @@ const app = express();
 
 connectDB();
 
+// ✅ Proper CORS setup (LOCAL + PRODUCTION)
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://basudevbnb-3nzp.vercel.app"
+];
+
 app.use(cors({
-  origin: ["https://basudevbnb-3nzp.vercel.app"],
+  origin: function (origin, callback) {
+    // allow requests with no origin (Postman, server-to-server)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 
