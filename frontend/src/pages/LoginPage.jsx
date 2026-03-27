@@ -8,16 +8,25 @@ export default function LoginPage() {
   const { login, user } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
+
   const [form, setForm] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
 
   const from = location.state?.from?.pathname || '/'
 
-  if (user) { navigate(from, { replace: true }); return null }
+  if (user) {
+    navigate(from, { replace: true })
+    return null
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!form.email || !form.password) { toast.error('Please fill all fields'); return }
+
+    if (!form.email || !form.password) {
+      toast.error('Please fill all fields')
+      return
+    }
+
     setLoading(true)
     try {
       await login(form.email, form.password)
@@ -31,50 +40,91 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 px-4">
+      
       <div className="w-full max-w-md">
-        <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-900">Welcome back</h1>
-            <p className="text-gray-500 text-sm mt-2">Log in to your Basudevbnb account</p>
+        
+        <div className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-3xl shadow-2xl p-8">
+
+          {/* Header */}
+          <div className="text-center mb-6">
+            <h1 className="text-3xl font-bold text-gray-900">
+              Welcome Back 👋
+            </h1>
+            <p className="text-gray-500 text-sm mt-2">
+              Login to continue to your account
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+
+            {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
               <input
                 type="email"
                 value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, email: e.target.value })
+                }
                 placeholder="you@example.com"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm 
+                focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+                transition-all duration-200"
               />
             </div>
+
+            {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Password
+              </label>
               <input
                 type="password"
                 value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                onChange={(e) =>
+                  setForm({ ...form, password: e.target.value })
+                }
                 placeholder="••••••••"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full border border-gray-300 rounded-xl px-4 py-3 text-sm 
+                focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent
+                transition-all duration-200"
               />
             </div>
+
+            {/* Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3 rounded-xl font-semibold transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
+              className="w-full bg-primary-500 hover:bg-primary-600 text-white py-3 rounded-xl font-semibold 
+              transition-all duration-200 disabled:opacity-60 flex items-center justify-center gap-2 shadow-md hover:shadow-lg"
             >
               {loading && <Spinner size="sm" />}
               {loading ? 'Logging in...' : 'Log in'}
             </button>
           </form>
 
-          
-          <p className="text-center text-sm text-gray-600 mt-4">
+          {/* Divider */}
+          <div className="flex items-center gap-3 my-6">
+            <div className="flex-1 h-px bg-gray-200"></div>
+            <span className="text-xs text-gray-400">OR</span>
+            <div className="flex-1 h-px bg-gray-200"></div>
+          </div>
+
+          {/* Signup */}
+          <p className="text-center text-sm text-gray-600">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-primary-500 font-medium hover:underline">Sign up</Link>
+            <Link
+              to="/signup"
+              className="text-primary-500 font-semibold hover:underline"
+            >
+              Sign up
+            </Link>
           </p>
+
         </div>
       </div>
     </div>
