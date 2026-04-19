@@ -1,0 +1,79 @@
+Issue Type,Summary,Description,Epic Name,Epic,Labels,Priority,Story Points,Status
+Epic,Foundation & Architecture,"Establish core MERN architecture, backend bootstrap, DB connectivity, and base frontend shell for scalable development.",Foundation & Architecture,,architecture setup,High,8,Done
+Epic,Authentication & Authorization,"Implement secure auth, token lifecycle, protected routes, and role-based access for admin operations.",Authentication & Authorization,,auth security backend frontend,Highest,8,Done
+Epic,Listings & Discovery,"Deliver listing model, APIs, filtering/search, and user-facing discovery pages.",Listings & Discovery,,listings search frontend backend,High,8,Done
+Epic,Booking & Wishlist,"Implement booking lifecycle and wishlist management across backend and frontend.",Booking & Wishlist,,booking wishlist backend frontend,High,8,Done
+Epic,Admin Module,"Provide admin-only operational capabilities for listing management and platform oversight.",Admin Module,,admin backend frontend,High,8,Done
+Epic,Dockerization & Deployment Readiness,"Containerize frontend and backend using production-focused Docker workflow and compose orchestration.",Dockerization & Deployment Readiness,,docker devops deployment,Highest,8,Done
+Epic,Documentation & Academic Demo Readiness,"Prepare technical documentation and demo narrative suitable for faculty evaluation.",Documentation & Academic Demo Readiness,,docs presentation planning,High,5,In Progress
+Story,Initialize repository module boundaries,"Finalize repository with clear frontend/backend boundaries and shared root orchestration.",,Foundation & Architecture,architecture setup,High,3,Done
+Story,Bootstrap Express application entrypoint,"Implement backend app entrypoint with middleware chain and route mounting.",,Foundation & Architecture,backend express,High,3,Done
+Story,Configure MongoDB connection layer,"Add reusable DB connection utility with env-based URI and startup integration.",,Foundation & Architecture,backend mongodb,High,3,Done
+Story,Register modular API route groups,"Mount auth/listings/bookings/users routers under versioned API prefixes.",,Foundation & Architecture,backend api,High,3,Done
+Story,Set global error handling path,"Integrate centralized error responses for unexpected runtime exceptions.",,Foundation & Architecture,backend reliability,Medium,2,Done
+Story,Create frontend application shell,"Establish core app layout and route container for scalable page growth.",,Foundation & Architecture,frontend routing,High,3,Done
+Story,Set reusable UI component baseline,"Create common components and shared UX primitives across pages.",,Foundation & Architecture,frontend ui,Medium,2,Done
+Story,Implement user registration API,"Create endpoint to register users with validation and duplicate checks.",,Authentication & Authorization,auth backend,Highest,5,Done
+Story,Implement user login API,"Create credential-based login endpoint returning authenticated user context and token.",,Authentication & Authorization,auth backend,Highest,5,Done
+Story,Generate JWT token strategy,"Add signed token generation with controlled expiry for session continuity.",,Authentication & Authorization,auth jwt security,Highest,3,Done
+Story,Implement protect middleware,"Enforce token validation on protected API routes.",,Authentication & Authorization,auth middleware security,Highest,5,Done
+Story,Implement admin role middleware,"Restrict privileged operations to administrative users only.",,Authentication & Authorization,auth admin security,High,3,Done
+Story,Add password hashing with bcrypt,"Secure password storage through model-level hashing lifecycle hooks.",,Authentication & Authorization,auth security backend,Highest,3,Done
+Story,Build frontend auth context provider,"Persist authenticated user state globally in frontend context.",,Authentication & Authorization,frontend auth,High,3,Done
+Story,Persist token in local storage,"Restore user session from stored credentials on app reload.",,Authentication & Authorization,frontend auth,Medium,2,Done
+Story,Add Axios auth request interceptor,"Automatically append bearer token for protected API calls.",,Authentication & Authorization,frontend auth api,High,3,Done
+Story,Add Axios auth response interceptor,"Handle unauthorized responses by clearing stale session state.",,Authentication & Authorization,frontend auth api,High,3,Done
+Story,Implement protected route wrapper,"Restrict user-only pages from unauthenticated access.",,Authentication & Authorization,frontend auth routing,High,3,Done
+Story,Implement admin route wrapper,"Restrict admin views by role check on frontend route layer.",,Authentication & Authorization,frontend auth admin,High,3,Done
+Story,Design listing schema and relationships,"Define listing model fields for category, pricing, host, amenities, and metadata.",,Listings & Discovery,backend listings mongodb,High,3,Done
+Story,Implement listing CRUD APIs,"Create endpoints for create/read/update/delete listing operations.",,Listings & Discovery,backend listings api,High,5,Done
+Story,Implement listing filtering logic,"Support price/category/guest/bedroom filtering via query parameters.",,Listings & Discovery,backend listings search,High,5,Done
+Story,Implement listing search support,"Enable keyword-style listing discovery behavior for users.",,Listings & Discovery,backend listings search,Medium,3,Done
+Story,Implement listing detail endpoint,"Expose single listing detail with related host metadata.",,Listings & Discovery,backend listings api,Medium,2,Done
+Story,Build listing cards and grids,"Render reusable listing cards and responsive discovery surfaces.",,Listings & Discovery,frontend listings ui,Medium,3,Done
+Story,Build listing detail page UI,"Create full listing detail experience with booking entry path.",,Listings & Discovery,frontend listings page,High,3,Done
+Story,Build search and filter UI,"Implement interactive listing filters and search result rendering.",,Listings & Discovery,frontend search ui,High,5,Done
+Story,Define booking data model,"Create booking schema with listing, user, date range, status, and total price.",,Booking & Wishlist,backend booking mongodb,High,3,Done
+Story,Implement booking creation endpoint,"Create booking API with server-side price computation and validation.",,Booking & Wishlist,backend booking api,Highest,5,Done
+Story,Implement user booking history endpoint,"Provide authenticated users with personal booking timeline.",,Booking & Wishlist,backend booking api,High,3,Done
+Story,Implement booking cancellation endpoint,"Allow users to cancel eligible bookings with authorization checks.",,Booking & Wishlist,backend booking api,High,3,Done
+Story,Build booking history page,"Render booking timeline and statuses in frontend user area.",,Booking & Wishlist,frontend booking page,Medium,3,Done
+Story,Implement wishlist persistence model,"Store user wishlist references to listing entities.",,Booking & Wishlist,backend wishlist mongodb,Medium,2,Done
+Story,Implement wishlist toggle API,"Add/remove listing from wishlist through single endpoint behavior.",,Booking & Wishlist,backend wishlist api,Medium,3,Done
+Story,Implement wishlist retrieval API,"Return populated wishlist data for authenticated users.",,Booking & Wishlist,backend wishlist api,Medium,2,Done
+Story,Build wishlist frontend page,"Display and manage saved listings from authenticated account.",,Booking & Wishlist,frontend wishlist page,Medium,3,Done
+Story,Create admin dashboard page,"Provide admin overview entrypoint for platform operations.",,Admin Module,frontend admin,High,3,Done
+Story,Create admin manage listings page,"Enable administrative listing visibility and operations.",,Admin Module,frontend admin listings,High,3,Done
+Story,Implement admin add listing flow,"Allow admins to create new listings via protected interface.",,Admin Module,frontend admin listings backend,High,3,Done
+Story,Implement admin edit listing flow,"Allow admins to update existing listings via protected interface.",,Admin Module,frontend admin listings backend,High,3,Done
+Story,Implement admin delete listing flow,"Allow admins to remove listings through controlled actions.",,Admin Module,frontend admin listings backend,High,3,Done
+Story,Apply admin authorization on backend routes,"Enforce admin middleware on write-sensitive listing operations.",,Admin Module,backend admin security,Highest,3,Done
+Story,Create backend production Dockerfile,"Build optimized backend runtime image using multi-stage approach.",,Dockerization & Deployment Readiness,docker backend devops,Highest,5,Done
+Story,Harden backend container runtime user,"Run backend process as non-root user for basic container security.",,Dockerization & Deployment Readiness,docker backend security,High,2,Done
+Story,Create frontend production Dockerfile,"Build frontend static assets and serve through nginx runtime image.",,Dockerization & Deployment Readiness,docker frontend nginx,Highest,5,Done
+Story,Configure nginx SPA fallback routing,"Ensure deep links resolve to index for React Router paths.",,Dockerization & Deployment Readiness,nginx frontend routing,High,3,Done
+Story,Configure nginx API reverse proxy,"Proxy /api traffic to backend service within compose network.",,Dockerization & Deployment Readiness,nginx proxy backend,Highest,3,Done
+Story,Create docker-compose orchestration,"Define frontend/backend services, ports, environment, and shared network.",,Dockerization & Deployment Readiness,docker compose devops,Highest,5,Done
+Story,Add backend dockerignore rules,"Optimize backend build context and prevent accidental secret inclusion.",,Dockerization & Deployment Readiness,docker backend hygiene,Medium,2,Done
+Story,Add frontend dockerignore rules,"Optimize frontend build context and exclude non-runtime artifacts.",,Dockerization & Deployment Readiness,docker frontend hygiene,Medium,2,Done
+Story,Document Docker architecture and commands,"Prepare docker.md explaining image strategy, compose flow, and commands.",,Dockerization & Deployment Readiness,docker docs devops,High,3,Done
+Story,Run full container smoke validation,"Validate app boot sequence and API availability in containerized runtime.",,Dockerization & Deployment Readiness,docker qa validation,High,3,In Review
+Story,Prepare architecture explanation document,"Consolidate technical narrative for backend/frontend/module design choices.",,Documentation & Academic Demo Readiness,docs architecture,High,3,Done
+Story,Prepare controller and auth explanation guide,"Document controller responsibilities and middleware security flow for viva.",,Documentation & Academic Demo Readiness,docs backend auth,High,3,Done
+Story,Review README consistency with delivered features,"Reconcile documented features/endpoints with implemented behavior.",,Documentation & Academic Demo Readiness,docs qa review,Medium,2,In Review
+Story,Prepare faculty demo script,"Create structured 5-7 minute demo sequence covering user and admin flows.",,Documentation & Academic Demo Readiness,presentation planning,High,3,In Progress
+Story,Capture visual evidence for Jira cards,"Attach screenshots/log snapshots for major completed features and Docker runtime.",,Documentation & Academic Demo Readiness,presentation docs jira,Medium,2,In Progress
+Story,Create release-day readiness checklist,"Prepare final pre-demo checklist for environment, credentials, and flow control.",,Documentation & Academic Demo Readiness,planning release,Medium,2,To Do
+Story,Add limitations and future roadmap card,"Document technical constraints and prioritized enhancements post-submission.",,Documentation & Academic Demo Readiness,planning roadmap docs,Low,2,To Do
+Story,Add CI pipeline improvement task,"Plan lint/build automation workflow for future production maturity.",,Documentation & Academic Demo Readiness,ci devops backlog,Low,3,To Do
+Epic,Automated Testing & Quality Assurance,"Implement and operationalize backend automated testing with Jest and Supertest, including validation strategy and CI readiness.",Automated Testing & Quality Assurance,,testing qa backend,Highest,8,In Progress
+Story,Setup automated testing environment using Jest,"Configure Jest in backend project and add npm test script in package.json for consistent local execution.",,Automated Testing & Quality Assurance,jest backend testing,Highest,3,Done
+Story,Integrate Supertest for API testing,"Integrate Supertest with exported Express app to support request/response assertions without starting a real server.",,Automated Testing & Quality Assurance,supertest backend testing,Highest,3,Done
+Story,Implement health check API test,"Add automated test coverage for /api/health endpoint and validate response contract.",,Automated Testing & Quality Assurance,health-api testing backend,High,2,Done
+Story,Implement authentication API tests (signup and login),"Cover signup user creation and login token generation flows using dynamic test users to ensure repeatability.",,Automated Testing & Quality Assurance,auth testing backend,Highest,5,Done
+Story,Implement protected route testing,"Validate JWT-protected endpoint behavior and verify unauthorized access returns correct error status.",,Automated Testing & Quality Assurance,authz testing security,Highest,3,Done
+Story,Handle test data isolation and dynamic input generation,"Use in-memory MongoDB lifecycle hooks and random email generation to avoid cross-test contamination and duplicate-user conflicts.",,Automated Testing & Quality Assurance,test-data isolation mongodb,High,5,Done
+Story,Implement negative test cases for API validation,"Expand negative-path coverage for invalid credentials, missing fields, and unauthorized access handling.",,Automated Testing & Quality Assurance,negative-tests validation backend,High,5,In Progress
+Story,Execute integration testing for backend APIs,"Run full backend API integration suite and validate end-to-end database interaction under test environment.",,Automated Testing & Quality Assurance,integration-testing backend qa,High,3,Done
+Story,Debug and fix test failures,"Analyze failing cases, patch backend/test setup issues, and stabilize automated test execution.",,Automated Testing & Quality Assurance,debug qa backend,Medium,3,In Review
+Story,Integrate automated testing into CI/CD pipeline using GitHub Actions,"Create CI workflow to run backend tests on push/PR and fail pipeline on test failures.",,Automated Testing & Quality Assurance,github-actions ci testing,Medium,5,To Do
