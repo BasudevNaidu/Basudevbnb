@@ -18,6 +18,7 @@ import CancellationPolicyPage from './pages/CancellationPolicyPage'
 import HelpCenterPage from './pages/HelpCenterPage'
 import SafetyInfoPage from './pages/SafetyInfoPage'
 import HowItWorksPage from './pages/HowItWorksPage'
+import BecomeHostPage from './pages/BecomeHostPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import ManageListingsPage from './pages/admin/ManageListingsPage'
 import AddListingPage from './pages/admin/AddListingPage'
@@ -40,6 +41,7 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="/how-it-works" element={<HowItWorksPage />} />
+              <Route path="/become-a-host" element={<BecomeHostPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/cancellation-policy" element={<CancellationPolicyPage />} />
               <Route path="/help" element={<HelpCenterPage />} />

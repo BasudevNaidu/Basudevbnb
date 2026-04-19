@@ -22,6 +22,7 @@ export default function Footer() {
               <li><Link to="/search?category=Mountain" className="hover:text-rose-400 transition-colors">⛰️ Mountain</Link></li>
               <li><Link to="/search?category=City" className="hover:text-rose-400 transition-colors">🌆 City</Link></li>
               <li><Link to="/search?category=Luxury" className="hover:text-rose-400 transition-colors">💎 Luxury</Link></li>
+              <li><Link to="/become-a-host" className="hover:text-rose-400 transition-colors font-medium text-rose-400/70">🏠 Become a Host</Link></li>
             </ul>
           </div>
 

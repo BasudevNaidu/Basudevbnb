@@ -61,6 +61,12 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-4">
+            <Link
+              to="/become-a-host"
+              className="text-sm font-semibold text-slate-700 hover:text-rose-500 transition-colors border border-gray-200 rounded-full px-4 py-2 hover:border-rose-300 hover:bg-rose-50 transition-all"
+            >
+              Become a Host
+            </Link>
             {user?.role === 'admin' && (
               <Link to="/admin" className="text-sm font-medium text-gray-600 hover:text-primary-500 transition-colors">
                 Admin Panel
