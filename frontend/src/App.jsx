@@ -19,6 +19,8 @@ import HelpCenterPage from './pages/HelpCenterPage'
 import SafetyInfoPage from './pages/SafetyInfoPage'
 import HowItWorksPage from './pages/HowItWorksPage'
 import BecomeHostPage from './pages/BecomeHostPage'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
 import SubmitListingPage from './pages/SubmitListingPage'
 import MyListingRequestsPage from './pages/MyListingRequestsPage'
 import AdminListingRequestsPage from './pages/admin/AdminListingRequestsPage'
@@ -49,6 +51,8 @@ function App() {
               <Route path="/cancellation-policy" element={<CancellationPolicyPage />} />
               <Route path="/help" element={<HelpCenterPage />} />
               <Route path="/safety" element={<SafetyInfoPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
               <Route path="/profile" element={<ProtectedRoute><UserProfilePage /></ProtectedRoute>} />
               <Route path="/dashboard" element={<ProtectedRoute><UserDashboardPage /></ProtectedRoute>} />
               <Route path="/wishlist" element={<ProtectedRoute><WishlistPage /></ProtectedRoute>} />

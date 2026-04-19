@@ -55,8 +55,8 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} Basudevbnb, Inc. All rights reserved.</p>
 
           <div className="flex items-center gap-5 mt-3 md:mt-0">
-            <a href="#" className="hover:text-rose-400 transition-colors">Privacy</a>
-            <a href="#" className="hover:text-rose-400 transition-colors">Terms</a>
+            <Link to="/privacy" className="hover:text-rose-400 transition-colors">Privacy</Link>
+            <Link to="/terms" className="hover:text-rose-400 transition-colors">Terms</Link>
             <Link to="/how-it-works" className="hover:text-rose-400 transition-colors">How it works</Link>
             <div className="flex items-center gap-3 ml-2 border-l border-gray-200 pl-4">
               <a href="https://github.com/BasudevNaidu" target="_blank" rel="noopener noreferrer"
