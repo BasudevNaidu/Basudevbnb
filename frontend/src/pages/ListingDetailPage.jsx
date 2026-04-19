@@ -7,6 +7,7 @@ import ImageCarousel from '../components/ImageCarousel'
 import Spinner from '../components/Spinner'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
+import { formatPrice } from '../utils/currency'
 
 export default function ListingDetailPage() {
   const { id } = useParams()
@@ -145,7 +146,7 @@ export default function ListingDetailPage() {
         <div className="lg:col-span-1">
           <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-xl sticky top-24">
             <div className="flex items-baseline gap-1 mb-4">
-              <span className="text-2xl font-bold text-gray-900">${listing.price}</span>
+              <span className="text-2xl font-bold text-gray-900">{formatPrice(listing.price, listing.country)}</span>
               <span className="text-gray-500">/ night</span>
             </div>
             {listing.rating > 0 && (

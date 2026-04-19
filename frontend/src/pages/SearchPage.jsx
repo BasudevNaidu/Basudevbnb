@@ -22,11 +22,12 @@ export default function SearchPage() {
   const { user } = useAuth()
 
   const search = searchParams.get('search') || ''
+  const countryParam = searchParams.get('country') || ''
 
   useEffect(() => {
     fetchListings()
     if (user) fetchWishlist()
-  }, [filters, search])
+  }, [filters, search, countryParam])
 
   const fetchListings = async () => {
     setLoading(true)
@@ -37,6 +38,7 @@ export default function SearchPage() {
       if (filters.minPrice) params.append('minPrice', filters.minPrice)
       if (filters.maxPrice) params.append('maxPrice', filters.maxPrice)
       if (filters.sort) params.append('sort', filters.sort)
+      if (countryParam) params.append('country', countryParam)
       const { data } = await api.get(`/listings?${params.toString()}`)
       setListings(data)
     } catch (e) {
@@ -58,7 +60,7 @@ export default function SearchPage() {
       <div className="mb-6 flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            {search ? `Results for "${search}"` : filters.category ? `${filters.category} stays` : 'All stays'}
+            {search ? `Results for "${search}"` : countryParam ? `Stays in ${countryParam}` : filters.category ? `${filters.category} stays` : 'All stays'}
           </h1>
           <p className="text-gray-500 text-sm mt-1">{loading ? '...' : `${listings.length} properties found`}</p>
         </div>

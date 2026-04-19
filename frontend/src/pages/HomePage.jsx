@@ -43,8 +43,16 @@ export default function HomePage() {
   const fetchFeatured = async () => {
     setLoading(true)
     try {
-      const params = selectedCountry ? `?country=${encodeURIComponent(selectedCountry)}` : ''
-      const { data } = await api.get(`/listings/featured${params}`)
+      let data
+      if (selectedCountry) {
+        // Show ALL listings for the selected country (not just featured)
+        const res = await api.get(`/listings?country=${encodeURIComponent(selectedCountry)}`)
+        data = res.data
+      } else {
+        // Show only featured listings on the default home view
+        const res = await api.get('/listings/featured')
+        data = res.data
+      }
       setFeatured(data)
     } catch (e) {
       console.error(e)

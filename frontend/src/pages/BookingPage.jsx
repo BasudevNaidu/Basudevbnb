@@ -6,6 +6,7 @@ import api from '../utils/api'
 import toast from 'react-hot-toast'
 import Spinner from '../components/Spinner'
 import { FiMapPin, FiStar } from 'react-icons/fi'
+import { formatPrice } from '../utils/currency'
 
 export default function BookingPage() {
   const { listingId } = useParams()
@@ -108,8 +109,8 @@ export default function BookingPage() {
               <h2 className="text-lg font-semibold mb-4">Price details</h2>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between text-gray-700">
-                  <span>${listing.price} x {nights} night{nights !== 1 ? 's' : ''}</span>
-                  <span>${listing.price * nights}</span>
+                  <span>{formatPrice(listing.price, listing.country)} x {nights} night{nights !== 1 ? 's' : ''}</span>
+                  <span>{formatPrice(listing.price * nights, listing.country)}</span>
                 </div>
                 <div className="flex justify-between text-gray-700">
                   <span>Service fee</span>
@@ -117,7 +118,7 @@ export default function BookingPage() {
                 </div>
                 <div className="border-t border-gray-200 pt-2 flex justify-between font-bold text-gray-900">
                   <span>Total</span>
-                  <span>${total}</span>
+                  <span>{formatPrice(total, listing.country)}</span>
                 </div>
               </div>
             </div>
@@ -129,7 +130,7 @@ export default function BookingPage() {
             className="w-full bg-primary-500 hover:bg-primary-600 text-white py-4 rounded-xl font-bold text-lg transition-colors disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {loading && <Spinner size="sm" />}
-            {loading ? 'Confirming...' : `Confirm booking${total > 0 ? ` - $${total}` : ''}`}
+            {loading ? 'Confirming...' : `Confirm booking${total > 0 ? ` — ${formatPrice(total, listing.country)}` : ''}`}
           </button>
         </div>
 
@@ -155,7 +156,7 @@ export default function BookingPage() {
               </p>
             )}
             <div className="border-t border-gray-200 mt-4 pt-4">
-              <p className="text-lg font-bold text-gray-900">${listing.price} <span className="text-sm font-normal text-gray-500">/ night</span></p>
+              <p className="text-lg font-bold text-gray-900">{formatPrice(listing.price, listing.country)} <span className="text-sm font-normal text-gray-500">/ night</span></p>
             </div>
           </div>
         </div>

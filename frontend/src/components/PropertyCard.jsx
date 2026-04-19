@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import api from '../utils/api'
 import toast from 'react-hot-toast'
 import { useState } from 'react'
+import { formatPrice } from '../utils/currency'
 
 export default function PropertyCard({ listing, wishlistIds = [], onWishlistToggle }) {
   const { user } = useAuth()
@@ -74,7 +75,7 @@ export default function PropertyCard({ listing, wishlistIds = [], onWishlistTogg
           )}
         </div>
         <p className="mt-1 text-sm">
-          <span className="font-semibold text-gray-900">${listing.price}</span>
+          <span className="font-semibold text-gray-900">{formatPrice(listing.price, listing.country)}</span>
           <span className="text-gray-500"> / night</span>
         </p>
       </div>
