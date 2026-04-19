@@ -31,6 +31,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/listings', require('./routes/listingRoutes'));
 app.use('/api/bookings', require('./routes/bookingRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/listing-requests', require('./routes/listingRequestRoutes'));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

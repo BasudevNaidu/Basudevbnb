@@ -19,6 +19,9 @@ import HelpCenterPage from './pages/HelpCenterPage'
 import SafetyInfoPage from './pages/SafetyInfoPage'
 import HowItWorksPage from './pages/HowItWorksPage'
 import BecomeHostPage from './pages/BecomeHostPage'
+import SubmitListingPage from './pages/SubmitListingPage'
+import MyListingRequestsPage from './pages/MyListingRequestsPage'
+import AdminListingRequestsPage from './pages/admin/AdminListingRequestsPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import ManageListingsPage from './pages/admin/ManageListingsPage'
 import AddListingPage from './pages/admin/AddListingPage'
@@ -55,6 +58,9 @@ function App() {
               <Route path="/admin/listings" element={<AdminRoute><ManageListingsPage /></AdminRoute>} />
               <Route path="/admin/listings/add" element={<AdminRoute><AddListingPage /></AdminRoute>} />
               <Route path="/admin/listings/edit/:id" element={<AdminRoute><EditListingPage /></AdminRoute>} />
+              <Route path="/admin/listing-requests" element={<AdminRoute><AdminListingRequestsPage /></AdminRoute>} />
+              <Route path="/submit-listing" element={<ProtectedRoute><SubmitListingPage /></ProtectedRoute>} />
+              <Route path="/my-listing-requests" element={<ProtectedRoute><MyListingRequestsPage /></ProtectedRoute>} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>

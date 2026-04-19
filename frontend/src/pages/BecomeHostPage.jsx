@@ -388,7 +388,7 @@ export default function BecomeHostPage() {
             <div className="hero-line-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div className="shimmer-border p-px rounded-2xl">
                 <Link
-                  to="/signup"
+                  to="/submit-listing"
                   className="flex items-center gap-2 bg-slate-950 text-white px-8 py-4 rounded-2xl font-bold text-base hover:bg-slate-900 transition-colors"
                 >
                   Start Hosting <FiArrowRight size={18} />
@@ -549,7 +549,7 @@ export default function BecomeHostPage() {
             </div>
             <div className="flex flex-col items-center gap-4 flex-shrink-0">
               <Link
-                to="/signup"
+                to="/submit-listing"
                 className="flex items-center gap-2 bg-white text-slate-900 px-10 py-4 rounded-2xl font-bold text-base hover:bg-slate-100 transition-colors shadow-xl whitespace-nowrap"
               >
                 Get Started — It's Free <FiArrowRight size={18} />
@@ -587,7 +587,7 @@ export default function BecomeHostPage() {
           </p>
           <div className="shimmer-border inline-block p-px rounded-2xl">
             <Link
-              to="/signup"
+              to="/submit-listing"
               className="flex items-center gap-2 bg-slate-950 text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-slate-900 transition-colors"
             >
               Create Your Listing <FiArrowRight size={20} />

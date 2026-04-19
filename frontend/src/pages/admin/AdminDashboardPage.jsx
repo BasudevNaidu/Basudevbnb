@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../../utils/api'
 import Spinner from '../../components/Spinner'
-import { FiHome, FiUsers, FiCalendar, FiPlusCircle, FiList } from 'react-icons/fi'
+import { FiHome, FiUsers, FiCalendar, FiPlusCircle, FiList, FiInbox } from 'react-icons/fi'
 
 export default function AdminDashboardPage() {
-  const [stats, setStats] = useState({ listings: 0, users: 0, bookings: 0 })
+  const [stats, setStats] = useState({ listings: 0, users: 0, bookings: 0, pendingRequests: 0 })
   const [recentListings, setRecentListings] = useState([])
   const [recentBookings, setRecentBookings] = useState([])
   const [loading, setLoading] = useState(true)
@@ -16,12 +16,13 @@ export default function AdminDashboardPage() {
 
   const fetchData = async () => {
     try {
-      const [listingsRes, usersRes, bookingsRes] = await Promise.all([
+      const [listingsRes, usersRes, bookingsRes, requestsRes] = await Promise.all([
         api.get('/listings/admin/all'),
         api.get('/users/admin/all'),
-        api.get('/bookings/admin/all')
+        api.get('/bookings/admin/all'),
+        api.get('/listing-requests/admin/all?status=pending')
       ])
-      setStats({ listings: listingsRes.data.length, users: usersRes.data.length, bookings: bookingsRes.data.length })
+      setStats({ listings: listingsRes.data.length, users: usersRes.data.length, bookings: bookingsRes.data.length, pendingRequests: requestsRes.data.length })
       setRecentListings(listingsRes.data.slice(0, 5))
       setRecentBookings(bookingsRes.data.slice(0, 5))
     } catch (e) {
@@ -52,6 +53,7 @@ export default function AdminDashboardPage() {
           { icon: <FiHome size={28} className="text-primary-500" />, label: 'Total Listings', count: stats.listings, bg: 'bg-red-50', link: '/admin/listings' },
           { icon: <FiUsers size={28} className="text-blue-500" />, label: 'Total Users', count: stats.users, bg: 'bg-blue-50', link: '#' },
           { icon: <FiCalendar size={28} className="text-green-500" />, label: 'Total Bookings', count: stats.bookings, bg: 'bg-green-50', link: '#' },
+          { icon: <FiInbox size={28} className="text-amber-500" />, label: 'Pending Requests', count: stats.pendingRequests, bg: 'bg-amber-50', link: '/admin/listing-requests' },
         ].map((s) => (
           <Link key={s.label} to={s.link} className={`${s.bg} rounded-2xl p-6 flex items-center gap-5 hover:shadow-md transition-shadow`}>
             <div className="bg-white p-4 rounded-xl shadow-sm">{s.icon}</div>
@@ -72,6 +74,13 @@ export default function AdminDashboardPage() {
         <Link to="/admin/listings/add" className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
           <FiPlusCircle size={20} className="text-primary-500" />
           <span className="font-medium text-gray-800">Add New Listing</span>
+        </Link>
+        <Link to="/admin/listing-requests" className="flex items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+          <FiInbox size={20} className="text-amber-500" />
+          <span className="font-medium text-amber-800">Review Listing Requests</span>
+          {stats.pendingRequests > 0 && (
+            <span className="ml-auto bg-amber-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">{stats.pendingRequests}</span>
+          )}
         </Link>
       </div>
 
