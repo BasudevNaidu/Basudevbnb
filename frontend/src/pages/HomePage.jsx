@@ -76,10 +76,10 @@ export default function HomePage() {
     <div>
       {/* Hero Section */}
       <div
-        className="relative h-[520px] flex items-center justify-center"
+        className="relative h-[580px] flex items-center justify-center"
         style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=1600)', backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        <div className="absolute inset-0 bg-black/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/60" />
         <div className="relative z-10 text-center text-white px-4 w-full max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-3">Find your next adventure</h1>
           <p className="text-lg md:text-xl mb-8 opacity-90">Discover unique places to stay around the world</p>
@@ -92,7 +92,7 @@ export default function HomePage() {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1 outline-none text-gray-800 text-base bg-transparent"
             />
-            <button type="submit" className="bg-primary-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-primary-600 transition-colors ml-3 whitespace-nowrap">
+            <button type="submit" className="bg-gradient-to-r from-rose-500 to-fuchsia-600 text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition-all duration-200 ml-3 whitespace-nowrap shadow-md">
               Search
             </button>
           </form>
@@ -186,10 +186,10 @@ export default function HomePage() {
         </section>
 
         {/* How it Works teaser */}
-        <section className="mt-20 bg-gradient-to-br from-primary-50 to-primary-100 rounded-3xl p-10 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-3">New to Basudevbnb?</h2>
-          <p className="text-gray-600 mb-6">Discover how easy it is to find and book your perfect stay in minutes.</p>
-          <Link to="/how-it-works" className="inline-block bg-primary-500 text-white px-8 py-3 rounded-xl font-semibold hover:bg-primary-600 transition-colors shadow-md">
+        <section className="mt-20 bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 rounded-3xl p-10 text-center relative overflow-hidden">
+          <h2 className="text-2xl font-bold text-white mb-3">New to Basudevbnb?</h2>
+          <p className="text-slate-300 mb-6">Discover how easy it is to find and book your perfect stay in minutes.</p>
+          <Link to="/how-it-works" className="inline-block bg-gradient-to-r from-rose-500 to-fuchsia-600 text-white px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-all duration-200 shadow-lg">
             See How It Works
           </Link>
         </section>

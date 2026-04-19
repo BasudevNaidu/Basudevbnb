@@ -20,3 +20,4 @@ router.put('/:id', protect, admin, updateListing);
 router.delete('/:id', protect, admin, deleteListing);
 
 module.exports = router;
+

@@ -34,7 +34,7 @@ export default function PropertyCard({ listing, wishlistIds = [], onWishlistTogg
   const image = listing.images?.[0] || 'https://images.unsplash.com/photo-1501180336600-ac7bfea1dbe9?w=600'
 
   return (
-    <Link to={`/listings/${listing._id}`} className="group block">
+    <Link to={`/listings/${listing._id}`} className="group block rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative overflow-hidden rounded-xl">
         <img
           src={image}
@@ -54,8 +54,8 @@ export default function PropertyCard({ listing, wishlistIds = [], onWishlistTogg
           )}
         </button>
         {listing.isFeatured && (
-          <span className="absolute top-3 left-3 bg-white text-primary-500 text-xs font-semibold px-2 py-1 rounded-full">
-            Featured
+          <span className="absolute top-3 left-3 bg-gradient-to-r from-rose-500 to-fuchsia-500 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
+            ✦ Featured
           </span>
         )}
       </div>
@@ -68,7 +68,7 @@ export default function PropertyCard({ listing, wishlistIds = [], onWishlistTogg
           </div>
           {listing.rating > 0 && (
             <div className="flex items-center gap-1 ml-2 flex-shrink-0">
-              <FiStar size={14} className="fill-current text-gray-800" />
+              <FiStar size={14} className="fill-amber-400 text-amber-400" />
               <span className="text-sm font-medium text-gray-800">{listing.rating}</span>
             </div>
           )}
