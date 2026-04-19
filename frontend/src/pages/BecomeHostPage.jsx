@@ -399,6 +399,8 @@ export default function BecomeHostPage() {
               </Link>
             </div>
 
+            
+
             {/* Trust badges */}
             <div className="hero-line-5 flex flex-wrap items-center gap-6 mt-10">
               {['No setup fees', 'Cancel anytime', '24/7 support'].map(item => (
