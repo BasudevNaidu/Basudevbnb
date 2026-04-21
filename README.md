@@ -222,49 +222,6 @@ Basudevbnb-Stack/
 }
 ```
 
----
-
-## 🌐 API Endpoints
-
-### 🔐 Auth — `/api/auth`
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/api/auth/register` | Register new user | ❌ |
-| POST | `/api/auth/login` | Login and receive JWT token | ❌ |
-
-### 🏠 Listings — `/api/listings`
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/listings` | Get all listings (with optional filters) | ❌ |
-| GET | `/api/listings/:id` | Get single listing by ID | ❌ |
-| POST | `/api/listings` | Create a new listing | ✅ Admin |
-| PUT | `/api/listings/:id` | Update a listing | ✅ Admin |
-| DELETE | `/api/listings/:id` | Delete a listing | ✅ Admin |
-
-### 📅 Bookings — `/api/bookings`
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| POST | `/api/bookings` | Create a new booking | ✅ User |
-| GET | `/api/bookings/my` | Get logged-in user's bookings | ✅ User |
-| PUT | `/api/bookings/:id/cancel` | Cancel a booking | ✅ User |
-| GET | `/api/bookings` | Get all bookings (admin) | ✅ Admin |
-
-### 👤 Users — `/api/users`
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/users/profile` | Get own profile | ✅ User |
-| PUT | `/api/users/profile` | Update profile (name, bio, avatar) | ✅ User |
-| GET | `/api/users/wishlist` | Get wishlist | ✅ User |
-| POST | `/api/users/wishlist/:id` | Add listing to wishlist | ✅ User |
-| DELETE | `/api/users/wishlist/:id` | Remove listing from wishlist | ✅ User |
-| GET | `/api/users` | Get all users (admin) | ✅ Admin |
-
-### 🩺 Health Check
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | Server health check |
-
----
 
 ## 🗺️ Frontend Routes
 
